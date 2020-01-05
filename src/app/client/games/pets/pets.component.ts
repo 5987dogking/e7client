@@ -65,7 +65,7 @@ export class PetsComponent implements OnInit, AfterViewInit {
       const sc = new ScratchCard('#js--sc--container', {
         scratchType: SCRATCH_TYPE.CIRCLE,
         containerWidth: scContainer.offsetWidth,
-        containerHeight: 200,
+        containerHeight: 300,
         // imageForwardSrc: 'assets/images/scratchcard.jpg',
         imageForwardSrc: 'assets/images/scratchcard/scratchcardFANSbeeA.png',
         imageBackgroundSrc: 'assets/images/scratchcard/scratchcardFANSbeeB.png',

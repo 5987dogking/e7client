@@ -34,7 +34,7 @@
   </mat-step>
 </mat-vertical-stepper>
 
-<div class="container" *ngIf="userPet.ok == 1">
+<div class="container" *ngIf="userPet.ok == 1" [hidden]="true">
   <div class="flex-div">
     <div class="flex-item">
       <img [src]="petsList[userPet.petId].image" class="img-rwd">
@@ -53,7 +53,14 @@
 </div>
 
 <h3 style="text-align: center;">刮刮卡</h3>
+<p align="center">邀請好友加入即可活得刮刮卡</p>
+<ul style="margin: 0% 30%;">
+  <li>LINE Points 500</li>
+  <li>LINE Points 20</li>
+  <li>LINE Points 10</li>
+  <li>銘謝惠顧</li>
+</ul>
 <div class="sc__wrapper">
   <div id="js--sc--container" class="sc__container"></div>
-  <div class="sc__infos"></div>
+  <div class="sc__infos" [hidden]="true"></div>
 </div>
