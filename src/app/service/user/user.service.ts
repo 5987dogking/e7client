@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { LiffService } from '../liff/liff.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -14,6 +14,7 @@ export interface SchoolUserProfile extends LIFFUserProfile {
 })
 export class UserService {
   schoolUserProfile: SchoolUserProfile;
+  userDoc: AngularFirestoreDocument;
   constructor(
     private db: AngularFirestore,
     private liffService: LiffService,
@@ -24,7 +25,8 @@ export class UserService {
     const profile: LIFFUserProfile = this.liffService.profile;
     const channelID = this.liffService.channelID;
     console.log(`/linebot/${channelID}/users`, channelID, profile);
-    this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId).get().subscribe(
+    this.userDoc = this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId);
+    this.userDoc.get().subscribe(
       (v) => {
         console.log('v', v);
         if (v.exists === false) {
@@ -34,7 +36,7 @@ export class UserService {
             studentId: '',
             name: profile.displayName,
           };
-          this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId).set(this.schoolUserProfile);
+          this.userDoc.set(this.schoolUserProfile);
         } else {
           const schoolUserProfile: SchoolUserProfile = v.data() as SchoolUserProfile;
           this.schoolUserProfile = schoolUserProfile;
@@ -44,20 +46,27 @@ export class UserService {
   }
 
   userDataSave() {
-    const profile: LIFFUserProfile = this.liffService.profile;
     const channelID = this.liffService.channelID;
     const min = 50801001;
     const max = 50812057;
-    if (Number(this.schoolUserProfile.studentId) < min || Number(this.schoolUserProfile.studentId) > max) {
+    const studentId = this.schoolUserProfile.studentId;
+    if (Number(studentId) < min || Number(studentId) > max) {
       this.snackBar.open('學號超出範圍(' + min + '~' + max + ')', '', { duration: 2000 });
       return;
     }
-    this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId).set(this.schoolUserProfile).then((result) => {
-      this.snackBar.open('更新成功', '', { duration: 2000 }).afterDismissed().subscribe(
-        (v) => { this.liffService.LIFFcloseWindow(); }
-      );
-    }).catch((err) => {
+    this.db.collection(`/linebot/${channelID}/users`, ref => ref.where('studentId', '==', studentId)).
+      get().subscribe(
+        (v) => {
+          if (v.docs.length > 1) {
+            this.snackBar.open('該學號已經存在!', '', { duration: 2000 });
+          } else {
+            this.userDoc.set(this.schoolUserProfile).then((result) => {
+              this.snackBar.open('更新成功', '', { duration: 2000 });
+            }).catch((err) => {
 
-    });
+            });
+          }
+        },
+      );
   }
 }
