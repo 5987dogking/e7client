@@ -28,13 +28,13 @@ export class UserService {
       (v) => {
         console.log('v', v);
         if (v.exists === false) {
-          const schoolUserProfile: SchoolUserProfile = {
+          this.schoolUserProfile = {
             ...profile,
             phone: '',
             studentId: '',
             name: profile.displayName,
           };
-          this.db.collection('admin').doc(profile.userId).set(schoolUserProfile);
+          this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId).set(this.schoolUserProfile);
         } else {
           const schoolUserProfile: SchoolUserProfile = v.data() as SchoolUserProfile;
           this.schoolUserProfile = schoolUserProfile;
