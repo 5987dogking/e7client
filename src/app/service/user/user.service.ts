@@ -23,6 +23,7 @@ export class UserService {
   userDataGet() {
     const profile: LIFFUserProfile = this.liffService.profile;
     const channelID = this.liffService.channelID;
+    console.log(`/linebot/${channelID}/users`, channelID, profile);
     this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId).get().subscribe(
       (v) => {
         console.log('v', v);
