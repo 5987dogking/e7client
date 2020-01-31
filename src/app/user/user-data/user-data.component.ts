@@ -35,12 +35,12 @@ export class UserDataComponent implements OnInit {
     }).catch((err) => {
       console.log('LIFFinit GG', err);
     });
-    // setTimeout(() => {
-    //   console.log('his.userService.schoolUserProfile', this.userService.schoolUserProfile);
-    //   if (this.userService.schoolUserProfile === undefined) {
-    //     this.getUserDataAndInit();
-    //   }
-    // }, 500);
+    setTimeout(() => {
+      console.log('his.userService.schoolUserProfile', this.userService.schoolUserProfile);
+      if (this.userService.schoolUserProfile === undefined) {
+        this.getUserDataAndInit();
+      }
+    }, 1500);
   }
 
   showVConsole() {

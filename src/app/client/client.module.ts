@@ -9,9 +9,18 @@ import { ClientLayoutComponent } from './layout/client-layout/client-layout.comp
 import { TestComponent } from './games/test/test.component';
 import { RailDailyTimeTableComponent } from './rail/rail-daily-time-table/rail-daily-time-table.component';
 import { PetsComponent } from './games/pets/pets.component';
+import { NotificationsComponent } from './games/notifications/notifications.component';
 
 @NgModule({
-  declarations: [RailStationComponent, BusRouteComponent, ClientLayoutComponent, TestComponent, RailDailyTimeTableComponent, PetsComponent],
+  declarations: [
+    RailStationComponent,
+    BusRouteComponent,
+    ClientLayoutComponent,
+    TestComponent,
+    RailDailyTimeTableComponent,
+    PetsComponent,
+    NotificationsComponent
+  ],
   imports: [
     CommonModule,
     ClientRoutingModule,

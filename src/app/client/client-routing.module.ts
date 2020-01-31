@@ -6,6 +6,7 @@ import { ClientLayoutComponent } from './layout/client-layout/client-layout.comp
 import { TestComponent } from './games/test/test.component';
 import { PetsComponent } from './games/pets/pets.component';
 import { RailDailyTimeTableComponent } from './rail/rail-daily-time-table/rail-daily-time-table.component';
+import { NotificationsComponent } from './games/notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
         path: 'games', children: [
           { path: 'test', component: TestComponent },
           { path: 'pets', component: PetsComponent },
+          { path: 'FCM', component: NotificationsComponent },
         ]
       },
     ]

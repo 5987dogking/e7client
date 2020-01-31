@@ -12,6 +12,10 @@ import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment.prod';
 import { RailTrainTimeTableDialogComponent } from './tools/dialog/rail-train-time-table-dialog/rail-train-time-table-dialog.component';
+import { FcmService } from './service/fcm/fcm.service';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AsyncPipe } from '@angular/common';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -33,13 +37,15 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AngularFireModule.initializeApp(environment.firebase, 'my-app-name'), // imports firebase/app needed for everything
+    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFireMessagingModule,
+    AngularFireDatabaseModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
   ],
-  providers: [],
+  providers: [FcmService, AsyncPipe],
   bootstrap: [AppComponent],
   entryComponents: [RailTrainTimeTableDialogComponent]
 })
