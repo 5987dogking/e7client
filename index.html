@@ -12,6 +12,7 @@
   <script src="assets/JOB.js"></script>
   <script src="assets/exif.js"></script>
   <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+  <link rel="manifest" href="assets/manifest.json">
   <script>
     // init vConsole
     // var vConsole = new VConsole();
@@ -62,7 +63,7 @@
       }
     }
   </style>
-<link rel="stylesheet" href="styles.d046a44eff19fbd084f5.css"></head>
+<link rel="stylesheet" href="styles.0fe8a0b26949abbb6d91.css"></head>
 
 <body>
   <app-root>
@@ -75,17 +76,24 @@
   </app-root>
   <!-- <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script> -->
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-<script src="runtime-es2015.6b51f056b4a393577cb4.js" type="module"></script><script src="polyfills-es2015.542631dca76648d5efd5.js" type="module"></script><script src="runtime-es5.ce0f6d59542e453bcfe0.js" nomodule></script><script src="polyfills-es5.5a263fafea0e75638677.js" nomodule></script><script src="main-es2015.935ad7cc5b275eb21508.js" type="module"></script><script src="main-es5.24811d82ffeeba43495e.js" nomodule></script></body>
+<script src="runtime-es2015.9e0accb61f5b2e2e535b.js" type="module"></script><script src="runtime-es5.9e0accb61f5b2e2e535b.js" nomodule defer></script><script src="polyfills-es5.5e48fa3dc66991f311b0.js" nomodule defer></script><script src="polyfills-es2015.79b5019f4dff069483c4.js" type="module"></script><script src="main-es2015.0f91984284197cb2a984.js" type="module"></script><script src="main-es5.0f91984284197cb2a984.js" nomodule defer></script></body>
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const liffId = urlParams.get('liffId');
-  liff.init({ liffId: liffId }).then(() => {
-    // Start to use liff's api
-    console.log('init okok');
-  }).catch((err) => {
-    // Error happens during initialization
-    console.log(err.code, err.message);
-  });
+  LIFF_INIT(LIFF_INIT);
+  function LIFF_INIT(liffId) {
+    if (location.hostname === 'localhost') {
+      return;
+    }
+    liff.init({ liffId: liffId }).then(() => {
+      // Start to use liff's api
+      console.log('init okok');
+    }).catch((err) => {
+      // Error happens during initialization
+      console.log(err.code, err.message);
+    });
+  }
+
 </script>
 
 </html>
