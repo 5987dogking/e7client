@@ -1,0 +1,22 @@
+<div class="container" *ngIf="userService.schoolUserProfile !== undefined">
+  <br>
+  <p>通知狀態：
+    <span *ngIf="userService.schoolUserProfile.access_token">已開啟</span>
+    <span *ngIf="!userService.schoolUserProfile.access_token">未開啟</span>
+  </p>
+
+  <div *ngIf="!userService.schoolUserProfile.access_token">
+    <a mat-raised-button color="primary" [href]="notifyLink" class="btn-block">前往榜定</a>
+  </div>
+  <div *ngIf="userService.schoolUserProfile.access_token">
+    <mat-form-field appearance="outline">
+      <mat-label>測試訊息</mat-label>
+      <input matInput placeholder="測試訊息" #msg>
+    </mat-form-field>
+    <a mat-raised-button color="primary" (click)="notifyTest(msg.value)" [disabled]="msg.value==''">送出</a>
+  </div>
+</div>
+
+<div class="container" *ngIf="userService.schoolUserProfile === undefined">
+  <p>載入中...</p>
+</div>

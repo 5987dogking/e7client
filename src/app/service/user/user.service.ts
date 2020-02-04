@@ -2,11 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { LiffService } from '../liff/liff.service';
 import { MatSnackBar } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface SchoolUserProfile extends LIFFUserProfile {
   phone: string;
   studentId: string;
   name: string;
+  access_token?: string;
+}
+
+export interface NotifyData {
+  client_id: string;
 }
 
 @Injectable({
@@ -19,30 +26,39 @@ export class UserService {
     private db: AngularFirestore,
     private liffService: LiffService,
     private snackBar: MatSnackBar,
+    private http: HttpClient,
   ) { }
 
-  userDataGet() {
+  userDataGet(): Promise<SchoolUserProfile> {
     const profile: LIFFUserProfile = this.liffService.profile;
     const channelID = this.liffService.channelID;
     console.log(`/linebot/${channelID}/users`, channelID, profile);
     this.userDoc = this.db.collection(`/linebot/${channelID}/users`).doc(profile.userId);
-    this.userDoc.get().subscribe(
-      (v) => {
-        console.log('v', v);
-        if (v.exists === false) {
-          this.schoolUserProfile = {
-            ...profile,
-            phone: '',
-            studentId: '',
-            name: profile.displayName,
-          };
-          this.userDoc.set(this.schoolUserProfile);
-        } else {
-          const schoolUserProfile: SchoolUserProfile = v.data() as SchoolUserProfile;
-          this.schoolUserProfile = schoolUserProfile;
+    return new Promise((resolve, reject) => {
+      this.userDoc.get().subscribe(
+        (v) => {
+          if (v.exists === false) {
+            this.schoolUserProfile = {
+              ...profile,
+              phone: '',
+              studentId: '',
+              name: profile.displayName,
+            };
+            this.userDoc.set(this.schoolUserProfile);
+            resolve(this.schoolUserProfile);
+          } else {
+            const schoolUserProfile: SchoolUserProfile = v.data() as SchoolUserProfile;
+            this.schoolUserProfile = schoolUserProfile;
+            resolve(this.schoolUserProfile);
+          }
         }
-      }
-    );
+      );
+    });
+  }
+
+  async notifyDataGet(): Promise<NotifyData> {
+    const url = 'https://us-central1-review-clean02.cloudfunctions.net/app/notify/' + this.liffService.channelID;
+    return await this.http.get<NotifyData>(url).toPromise();
   }
 
   userDataSave() {

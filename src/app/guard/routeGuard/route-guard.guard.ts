@@ -21,6 +21,12 @@ export class RouteGuardGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const nowUrl = state.url.split('?')[0];
+    console.log('next.queryParams', next.queryParams);
+    if (next.queryParams.state !== undefined) {
+      const code = next.queryParams.code;
+      window.location.href = location.origin + '?' + next.queryParams.state.replace(',', '&') + '&code=' + code;
+      return true;
+    }
     if (next.queryParams.liffId !== undefined) {
       this.liffService.liffId = next.queryParams.liffId;
     }
