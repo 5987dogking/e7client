@@ -87,9 +87,11 @@
     }
     liff.init({ liffId: liffId }).then(() => {
       // Start to use liff's api
+      alert('index liff ok');
       console.log('init okok');
     }).catch((err) => {
       // Error happens during initialization
+      alert('index liff gg');
       console.log(err.code, err.message);
     });
   }
