@@ -4,29 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>E7client</title>
-  <base href="https://user.e7school.com/">  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="https://user.e7school.com/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script> -->
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const liffId = urlParams.get('liffId');
-    LIFF_INIT(LIFF_INIT);
-    function LIFF_INIT(liffId) {
-      if (location.hostname === 'localhost') {
-        return;
-      }
-      liff.init({ liffId: liffId }).then(() => {
-        // Start to use liff's api
-        alert('index liff ok2');
-        console.log('init okok');
-      }).catch((err) => {
-        // Error happens during initialization
-        alert('index liff gg2');
-        console.log(err.code, err.message);
-      });
-    }
-  </script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="assets/JOB.js"></script>
@@ -94,6 +75,25 @@
       <span></span>
     </div>
   </app-root>
-<script src="runtime-es2015.70faae414a2756ea7dc4.js" type="module"></script><script src="runtime-es5.70faae414a2756ea7dc4.js" nomodule defer></script><script src="polyfills-es5.5e48fa3dc66991f311b0.js" nomodule defer></script><script src="polyfills-es2015.79b5019f4dff069483c4.js" type="module"></script><script src="main-es2015.fa507321ef5c54b28c01.js" type="module"></script><script src="main-es5.fa507321ef5c54b28c01.js" nomodule defer></script></body>
+  <!-- <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script> -->
+<script src="runtime-es2015.70faae414a2756ea7dc4.js" type="module"></script><script src="runtime-es5.70faae414a2756ea7dc4.js" nomodule defer></script><script src="polyfills-es5.5e48fa3dc66991f311b0.js" nomodule defer></script><script src="polyfills-es2015.79b5019f4dff069483c4.js" type="module"></script><script src="main-es2015.29b8a8d23c0c036f9cbe.js" type="module"></script><script src="main-es5.29b8a8d23c0c036f9cbe.js" nomodule defer></script></body>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const liffId = urlParams.get('liffId');
+  LIFF_INIT(LIFF_INIT);
+  function LIFF_INIT(liffId) {
+    if (location.hostname === 'localhost') {
+      return;
+    }
+    liff.init({ liffId: liffId }).then(() => {
+      // Start to use liff's api
+      console.log('init okok');
+    }).catch((err) => {
+      // Error happens during initialization
+      console.log(err.code, err.message);
+    });
+  }
+
+</script>
 
 </html>
