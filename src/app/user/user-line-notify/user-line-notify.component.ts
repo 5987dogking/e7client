@@ -10,31 +10,36 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserLineNotifyComponent implements OnInit {
   notifyLink = '';
+  loading = true;
   constructor(
     public userService: UserService,
     public liffService: LiffService,
     private http: HttpClient,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
     console.log('userService.schoolUserProfile', this.userService.schoolUserProfile);
+    await this.liffService.LIFFinit();
     this.userService.userDataGet().then(
       async (schoolUserProfile: SchoolUserProfile) => {
         if (schoolUserProfile.access_token === undefined) {
-          const urlParams = new URLSearchParams(window.location.search);
-          const code = urlParams.get('code');
-          if (code !== null) {
+          if (code !== null && urlParams.get('liffRedirectUri') === null) {
             this.notifyToken(code);
           } else {
             console.log('no code');
-
             const notifyData: NotifyData = await this.userService.notifyDataGet();
             console.log('notifyData', notifyData);
             this.notifyLink = 'https://notify-bot.line.me/oauth/authorize?response_type=code&scope=notify';
             this.notifyLink += `&client_id=${notifyData.client_id}`;
             this.notifyLink += `&redirect_uri=${location.origin}`;
-            this.notifyLink += `&state=page=user/userLineNotify,channelID=${this.liffService.channelID}`;
+            this.notifyLink += `&state=page=user/userLineNotify,channelID=${this.liffService.channelID},liffId=${this.liffService.liffId}`;
+            console.log('notifyLink', this.notifyLink);
+            this.loading = false;
           }
+        } else {
+          this.loading = false;
         }
       }
     );
@@ -47,12 +52,13 @@ export class UserLineNotifyComponent implements OnInit {
       channelID: this.liffService.channelID,
       code,
     };
-    this.http.post('https://us-central1-review-clean02.cloudfunctions.net/app/webhook/1604598759', notifyData).subscribe(
+    this.http.post(`https://us-central1-review-clean02.cloudfunctions.net/app/webhook/${this.liffService.channelID}`, notifyData).subscribe(
       (v: any) => {
         console.log('notifyToken v', v);
         this.userService.schoolUserProfile.access_token = v.access_token;
       },
       (e) => { console.log('notifyToken e', e); },
+      () => { this.loading = false; },
     );
   }
 

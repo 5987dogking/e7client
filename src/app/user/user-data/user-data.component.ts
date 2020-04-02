@@ -28,19 +28,7 @@ export class UserDataComponent implements OnInit {
   }
 
   getUserDataAndInit() {
-    console.log('getUserDataAndInit');
-    this.liffService.LIFFinit().then((result) => {
-      console.log('LIFFinit ok');
-      this.userService.userDataGet();
-    }).catch((err) => {
-      console.log('LIFFinit GG', err);
-    });
-    setTimeout(() => {
-      console.log('his.userService.schoolUserProfile', this.userService.schoolUserProfile);
-      if (this.userService.schoolUserProfile === undefined) {
-        this.getUserDataAndInit();
-      }
-    }, 1500);
+    this.userService.userDataGet();
   }
 
   showVConsole() {

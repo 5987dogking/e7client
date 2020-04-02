@@ -1,4 +1,4 @@
-<div class="container" *ngIf="userService.schoolUserProfile !== undefined">
+<div class="container" *ngIf="userService.schoolUserProfile !== undefined && !loading">
   <br>
   <p>通知狀態：
     <span *ngIf="userService.schoolUserProfile.access_token">已開啟</span>
@@ -6,9 +6,16 @@
   </p>
 
   <div *ngIf="!userService.schoolUserProfile.access_token">
+    <p><b>前往榜定請選擇第一個 如下範例</b></p>
+    <ul class="list-ul flexC">
+      <li class="flexC">
+        <img [src]="userService.schoolUserProfile.pictureUrl">
+        透過1對1聊天接收LINE Notify的通知
+      </li>
+    </ul>
     <a mat-raised-button color="primary" [href]="notifyLink" class="btn-block">前往榜定</a>
   </div>
-  <div *ngIf="userService.schoolUserProfile.access_token">
+  <div *ngIf="userService.schoolUserProfile.access_token && !loading">
     <mat-form-field appearance="outline">
       <mat-label>測試訊息</mat-label>
       <input matInput placeholder="測試訊息" #msg>
@@ -17,6 +24,6 @@
   </div>
 </div>
 
-<div class="container" *ngIf="userService.schoolUserProfile === undefined">
+<div class="container" *ngIf="userService.schoolUserProfile === undefined && loading">
   <p>載入中...</p>
 </div>
