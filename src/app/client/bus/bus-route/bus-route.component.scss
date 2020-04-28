@@ -13,3 +13,21 @@
 mat-tab-group {
   max-height: 80vh;
 }
+
+::ng-deep .primary {
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+::ng-deep mat-list .yetBus ~ .yetBus {
+  // display: none !important;
+  img {
+    display: none;
+  }
+}
+
+.mat-line {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}

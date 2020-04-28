@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "e7client"
+  "defaultProject": "e7client",
+  "cli": {
+    "analytics": false
+  }
 }
