@@ -34,13 +34,19 @@
       <button mat-raised-button color="primary" class="btn-block" (click)="scroll()">前往可搭班車</button>
       <mat-list>
         <ng-container *ngFor="let BusN1EstimateTime of motcService.BusN1EstimateTimesLeft">
-          <mat-list-item [ngClass]="{'grey': BusN1EstimateTime.StopStatus !== 0 }">
-            <h4 mat-line>
-              {{BusN1EstimateTime.NextBusTime | date:'HH:mm'}}
-              {{BusN1EstimateTime.StopName.Zh_tw}}
+          <mat-list-item [ngClass]="{'grey': BusN1EstimateTime.StopStatus !== 0,
+            'primary':BusN1EstimateTime.StopName.Zh_tw.indexOf('樹人醫專')!= -1,
+            'yetBus': BusN1EstimateTime.StopStatus == 0 }">
+            <h4 mat-line >
+              <span>
+                {{BusN1EstimateTime.NextBusTime | date:'HH:mm'}}
+                {{BusN1EstimateTime.StopName.Zh_tw}}
+              </span>
               <span *ngIf="BusN1EstimateTime.StopStatus !== 0">
                 {{StopStatus[BusN1EstimateTime.StopStatus]}}
               </span>
+              <img *ngIf="BusN1EstimateTime.Estimates !== undefined"
+                src="https://image.flaticon.com/icons/svg/543/543885.svg" width="40" class="busIcon">
               <span class="right" *ngIf="BusN1EstimateTime.Estimates !== undefined">
                 預計{{BusN1EstimateTime.Estimates[0].EstimateTime / 60}}分鐘
               </span>
