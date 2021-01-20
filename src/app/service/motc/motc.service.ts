@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RailStationTimetable, RailStation, RailGeneralTimetable, RailDailyTrainInfo, TRAGeneralTrainTimetableList } from 'src/app/interface/rail';
+import {
+  RailStationTimetable,
+  RailStation,
+  RailGeneralTimetable,
+  RailDailyTrainInfo,
+  TRAGeneralTrainTimetableList
+} from 'src/app/interface/rail';
 import { BusN1EstimateTime } from 'src/app/interface/bus';
 declare const require;
 const jssha = require('jssha');
@@ -153,6 +159,7 @@ export class MotcService {
       this.http.get(`https://ptx.transportdata.tw/MOTC/v2/Rail/TRA/DailyTimetable/Station/${stationID}/${data}?$filter=Direction eq 0&$orderby=ArrivalTime&$format=JSON`, this.MotcHttpOptions).subscribe(
         (v: RailStationTimetable[]) => {
           this.RailStationTimetablesRight = v;
+          console.log('RailStationTimetablesRight :>> ', v);
           resolve(true);
         }
       );

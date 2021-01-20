@@ -47,7 +47,7 @@
           <ng-container *ngFor="let RailStation of motcService.RailStationTimetablesRight">
             <mat-list-item [ngClass]="{'grey station-pass': motcService.nowTime > RailStation.ArrivalTime}">
               <h4 mat-line (click)="motcService.RailTRAGeneralTimetableTrainNo(RailStation.TrainNo);drawer.toggle()">
-                {{RailStation.ArrivalTime}} 開往 {{RailStation.EndingStationName}}
+                {{RailStation.ArrivalTime}} 開往 {{RailStation.EndingStationName.Zh_tw}}
                 <span class="right">車次{{RailStation.TrainNo}}</span>
               </h4>
             </mat-list-item>
@@ -60,7 +60,7 @@
           <ng-container *ngFor="let RailStation of motcService.RailStationTimetablesLeft">
             <mat-list-item [ngClass]="{'grey station-pass': motcService.nowTime > RailStation.ArrivalTime}">
               <h4 mat-line (click)="motcService.RailTRAGeneralTimetableTrainNo(RailStation.TrainNo);drawer.toggle()">
-                {{RailStation.ArrivalTime}} 開往 {{RailStation.EndingStationName}}
+                {{RailStation.ArrivalTime}} 開往 {{RailStation.EndingStationName.Zh_tw}}
                 <span class="right">車次{{RailStation.TrainNo}}</span>
               </h4>
             </mat-list-item>

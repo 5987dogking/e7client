@@ -11,7 +11,7 @@ export interface RailStationTimetable {
   StartingStationID: string; // : 起點車站代號 ,
   StartingStationName: string; // : 起點車站名稱 ,
   EndingStationID: string; // : 終點車站代號 ,
-  EndingStationName: string; // : 終點車站名稱 ,
+  EndingStationName: NameType; // : 終點車站名稱 ,
   ArrivalTime: string; // : 到站時間(格式: HH:mm:ss) ,
   DepartureTime: string; // : 離站時間(格式: HH:mm:ss) ,
   UpdateTime: string; // 本平台資料更新時間(ISO8601格式:yyyy-MM-ddTHH:mm:sszzz) ,
@@ -111,7 +111,7 @@ export interface RailDailyTrainInfo {
     },
     'TripHeadsign': '往潮州',
     'TrainTypeID': '1131',
-    'TrainTypeCode': '6',
+    'TrainTypeCode': string,
     'TrainTypeName': {
       'Zh_tw': '區間',
       'En': 'Local Train'

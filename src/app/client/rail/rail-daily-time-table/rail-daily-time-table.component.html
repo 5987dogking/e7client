@@ -68,9 +68,10 @@
       </li>
       <li>{{RailDailyTrainInfo.OriginStopTime.ArrivalTime}}</li>
       <li>
-        <mat-icon style="align-self: center;" [ngClass]="{'TrainTypeCode2': RailDailyTrainInfo.DailyTrainInfo.TrainTypeCode ==2,
-          'TrainTypeCode3': RailDailyTrainInfo.DailyTrainInfo.TrainTypeCode ==3,
-          'TrainTypeCode4': RailDailyTrainInfo.DailyTrainInfo.TrainTypeCode ==4}">
+        <mat-icon style="align-self: center;" [ngClass]="{
+          'TrainTypeCode2': RailDailyTrainInfo.DailyTrainInfo.TrainTypeCode == '2',
+          'TrainTypeCode3': RailDailyTrainInfo.DailyTrainInfo.TrainTypeCode == '3',
+          'TrainTypeCode4': RailDailyTrainInfo.DailyTrainInfo.TrainTypeCode == '4'}">
           train</mat-icon>
         {{RailDailyTrainInfo.DailyTrainInfo.TrainTypeName.Zh_tw.substr(0,3).replace('(','').replace('快','')}}
       </li>
