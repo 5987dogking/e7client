@@ -6,8 +6,8 @@ const routes: Routes = [
   // { path: '', pathMatch: 'full', redirectTo: 'client/rail/railStation' },
   {
     path: '', canActivate: [RouteGuardGuard], children: [
-      { path: 'user', loadChildren: './user/user.module#UserModule' },
-      { path: 'client', loadChildren: './client/client.module#ClientModule' },
+      { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+      { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
     ]
   }
 ];
