@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LiffService } from 'src/app/service/liff/liff.service';
 import { UserService } from 'src/app/service/user/user.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 declare let JOB: any;
 declare let VConsole: any;
 @Component({
