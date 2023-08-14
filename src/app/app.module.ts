@@ -28,25 +28,24 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RailTrainTimeTableDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    AngularFireMessagingModule,
-    AngularFireDatabaseModule,
-    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
-  ],
-  providers: [FcmService, AsyncPipe],
-  bootstrap: [AppComponent],
-  entryComponents: [RailTrainTimeTableDialogComponent]
+    declarations: [
+        AppComponent,
+        RailTrainTimeTableDialogComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        AngularFireStorageModule,
+        AngularFireMessagingModule,
+        AngularFireDatabaseModule,
+        FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    ],
+    providers: [FcmService, AsyncPipe],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
