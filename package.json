@@ -24,7 +24,6 @@
     "@types/jssha": "^2.0.0",
     "firebase": "^7.7.0",
     "firebaseui": "^4.4.0",
-    "firebaseui-angular": "^4.0.1",
     "jssha": "^2.3.1",
     "rxjs": "~6.6.7",
     "scratchcard-js": "^1.4.7",
