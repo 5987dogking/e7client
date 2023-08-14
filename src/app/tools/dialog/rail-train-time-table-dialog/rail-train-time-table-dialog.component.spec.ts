@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RailTrainTimeTableDialogComponent } from './rail-train-time-table-dialog.component';
 
@@ -6,7 +6,7 @@ describe('RailTrainTimeTableDialogComponent', () => {
   let component: RailTrainTimeTableDialogComponent;
   let fixture: ComponentFixture<RailTrainTimeTableDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RailTrainTimeTableDialogComponent ]
     })
