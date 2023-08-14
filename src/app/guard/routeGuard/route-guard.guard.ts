@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  CanActivate,
-  Router,
-  ActivatedRoute
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LiffService } from 'src/app/service/liff/liff.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RouteGuardGuard implements CanActivate {
+export class RouteGuardGuard  {
   constructor(
     private router: Router,
     private liffService: LiffService,
