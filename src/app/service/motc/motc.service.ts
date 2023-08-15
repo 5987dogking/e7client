@@ -211,6 +211,7 @@ export class MotcService {
     this.http.get<BusN1EstimateTime[]>(`https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/${City}/${RouteName}?$filter=Direction eq 1&$format=JSON&$orderby=StopSequence`, this.MotcHttpOptions).subscribe(
       (v: BusN1EstimateTime[]) => {
         if (v.length !== 0) {
+          console.log('v :>> ', v);
           this.BusN1EstimateTimesLeft = v;
           this.BusN1EstimateTimesLeftTab = v[0].StopName.Zh_tw + '>\n' + v.slice(-1)[0].StopName.Zh_tw;
         }

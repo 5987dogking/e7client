@@ -37,6 +37,8 @@ export class LiffService {
       liffSDK.src = 'https://static.line-scdn.net/liff/edge/2.1/sdk.js';
       liffSDK.id = 'liffSDK';
       document.head.appendChild(liffSDK);
+      resolve(true);
+      return true;
     });
   }
 

@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "e7client",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "taken-web": {
+      "hosting": {
+        "e7client": [
+          "e7school"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "taken-web"
+  }
+}

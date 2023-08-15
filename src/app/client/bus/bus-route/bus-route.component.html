@@ -11,7 +11,7 @@
           <mat-list-item [ngClass]="{'grey': BusN1EstimateTime.StopStatus !== 0,
             'primary':BusN1EstimateTime.StopName.Zh_tw.indexOf('樹人醫專')!= -1,
             'yetBus': BusN1EstimateTime.StopStatus == 0 }">
-            <h4 mat-line >
+            <h4 mat-line class="flexC">
               <span>
                 {{BusN1EstimateTime.NextBusTime | date:'HH:mm'}}
                 {{BusN1EstimateTime.StopName.Zh_tw}}
@@ -19,8 +19,8 @@
               <span *ngIf="BusN1EstimateTime.StopStatus !== 0">
                 {{StopStatus[BusN1EstimateTime.StopStatus]}}
               </span>
-              <img *ngIf="BusN1EstimateTime.Estimates !== undefined"
-                src="https://image.flaticon.com/icons/svg/543/543885.svg" width="40" class="busIcon">
+              <mat-icon *ngIf="justIn(BusN1EstimateTime,motcService.BusN1EstimateTimesRight)">directions_bus</mat-icon>
+              <!-- <mat-icon *ngIf="BusN1EstimateTime.Estimates !== undefined" class="busIcon">directions_bus</mat-icon> -->
               <span class="right" *ngIf="BusN1EstimateTime.Estimates !== undefined">
                 預計{{BusN1EstimateTime.Estimates[0].EstimateTime / 60}}分鐘
               </span>
@@ -37,7 +37,7 @@
           <mat-list-item [ngClass]="{'grey': BusN1EstimateTime.StopStatus !== 0,
             'primary':BusN1EstimateTime.StopName.Zh_tw.indexOf('樹人醫專')!= -1,
             'yetBus': BusN1EstimateTime.StopStatus == 0 }">
-            <h4 mat-line >
+            <h4 class="mat-line">
               <span>
                 {{BusN1EstimateTime.NextBusTime | date:'HH:mm'}}
                 {{BusN1EstimateTime.StopName.Zh_tw}}
@@ -45,8 +45,7 @@
               <span *ngIf="BusN1EstimateTime.StopStatus !== 0">
                 {{StopStatus[BusN1EstimateTime.StopStatus]}}
               </span>
-              <img *ngIf="BusN1EstimateTime.Estimates !== undefined"
-                src="https://image.flaticon.com/icons/svg/543/543885.svg" width="40" class="busIcon">
+              <mat-icon *ngIf="justIn(BusN1EstimateTime,motcService.BusN1EstimateTimesLeft)">directions_bus</mat-icon>
               <span class="right" *ngIf="BusN1EstimateTime.Estimates !== undefined">
                 預計{{BusN1EstimateTime.Estimates[0].EstimateTime / 60}}分鐘
               </span>

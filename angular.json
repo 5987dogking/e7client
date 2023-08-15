@@ -116,6 +116,12 @@
               "devServerTarget": "e7client:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "browserTarget": "e7client:build:production"
+          }
         }
       }
     }

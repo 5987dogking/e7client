@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { messaging } from 'firebase';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+
 declare global {
   interface Window { registration: any; }
 }
@@ -15,17 +13,16 @@ declare global {
 })
 export class FcmService {
   currentMessage = new BehaviorSubject(null);
-  messaging: messaging.Messaging;
+  // messaging: messaging.Messaging;
   constructor(
-    private angularFireDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging) {
-    this.angularFireMessaging.messaging.subscribe(
+    this.angularFireMessaging.messages.subscribe(
       // tslint:disable-next-line: variable-name
       (_messaging) => {
-        this.messaging = _messaging;
-        _messaging.onMessage = _messaging.onMessage.bind(_messaging);
-        _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
+        // this.messaging = _messaging;
+        // _messaging.onMessage = _messaging.onMessage.bind(_messaging);
+        // _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
       }
     );
   }
@@ -36,7 +33,7 @@ export class FcmService {
       () => {
         const data = {};
         data[userId] = token;
-        this.angularFireDB.object('fcmTokens/').update(data);
+        // this.angularFireDB.object('fcmTokens/').update(data);
       });
   }
 
@@ -54,13 +51,13 @@ export class FcmService {
   }
 
   receiveMessage() {
-    this.messaging.onMessage(
+    this.angularFireMessaging.onMessage(
       (payload) => {
         console.log('receiveMessage ', payload);
         this.currentMessage.next(payload);
         console.log(this.currentMessage);
       });
-    this.messaging.setBackgroundMessageHandler((payload) => {
+    this.angularFireMessaging.onBackgroundMessage((payload) => {
       console.log('[firebase-messaging-sw.js] Received background message ', payload);
       // Customize notification here
       const notificationTitle = 'Background Message Title';

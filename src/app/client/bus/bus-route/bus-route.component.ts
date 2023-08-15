@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MotcService } from 'src/app/service/motc/motc.service';
 import { ActivatedRoute } from '@angular/router';
+import { BusN1EstimateTime } from 'src/app/interface/bus';
 
 @Component({
   selector: 'app-bus-route',
@@ -26,7 +27,20 @@ export class BusRouteComponent implements OnInit {
     );
     setTimeout(() => {
       this.ngOnInit();
-    }, 10000);
+    }, 100000);
+  }
+
+  justIn(busN1EstimateTime: BusN1EstimateTime, busN1EstimateTimes: BusN1EstimateTime[]) {
+    if (!busN1EstimateTime.Estimates) { return false; }
+    let time = 0
+    for (const b of busN1EstimateTimes) {
+      if (time) { continue; }
+      if (b.Estimates) { time = b.Estimates[0].EstimateTime }
+    }
+    if (busN1EstimateTime.Estimates[0].EstimateTime === time) {
+      return true;
+    }
+    return false;
   }
 
   scroll() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MotcService } from 'src/app/service/motc/motc.service';
 import { RailStation } from 'src/app/interface/rail';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 // tslint:disable-next-line: max-line-length
 import { RailTrainTimeTableDialogComponent } from 'src/app/tools/dialog/rail-train-time-table-dialog/rail-train-time-table-dialog.component';
 
